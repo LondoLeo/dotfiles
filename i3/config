@@ -1,0 +1,149 @@
+# Constants
+set $mod Mod4
+set $mod2 control
+set $terminal kitty
+set $left h
+set $down j
+set $up k
+set $right l
+set $refresh_i3status killall -SIGUSR1 i3status
+
+# Colors
+set $bg-color #2f343f 
+set $text-color #d8dee8
+set $highlight-color #bf616a 
+set $border-color #6f747f
+set $indicator #b391e5
+client.focused $border-color $border-color $text-color  $indicator $border-color 
+client.focused_inactive $bg-color $bg-color $text-color $bg-color $bg-color
+client.unfocused $bg-color $bg-color $text-color $indicator $bg-color
+client.background #ffffff
+
+# General config
+font pango:monospace 10
+focus_follows_mouse no
+default_border pixel 1
+
+for_window [instance="^dropdown$"] \
+    floating enable, border none, \
+    resize set 100 ppt 50 ppt, \
+    move position 0 34, \
+    move scratchpad
+
+for_window [class="^steam_app_*$"] fullscreen enable
+# Keybinds
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+bindsym XF86AudioPlay exec playerctl --player=chromium play-pause
+bindsym XF86AudioNext exec playerctl --player=chromium next
+bindsym XF86AudioPrev exec playerctl --player=chromium previous
+
+bindsym $mod+d exec "rofi -modi drun,run -show drun -sort fzf"
+
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+$mod2+c reload
+bindsym $mod+$mod2+x restart
+bindsym $mod+$mod2+Escape exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym $mod+q workspace $ws1
+bindsym $mod+w workspace $ws2
+bindsym $mod+e workspace  $ws3
+bindsym $mod+r workspace  $ws4
+bindsym $mod+t workspace $ws5
+bindsym $mod+y workspace $ws6
+bindsym $mod+u workspace  $ws7
+bindsym $mod+i workspace  $ws8
+bindsym $mod+o workspace  $ws9
+bindsym $mod+p workspace $ws10
+
+bindsym $mod+$mod2+q move container to workspace $ws1; workspace $ws1
+bindsym $mod+$mod2+w move container to workspace $ws2; workspace $ws2
+bindsym $mod+$mod2+e move container to workspace  $ws3; workspace $ws3
+bindsym $mod+$mod2+r move container to workspace  $ws4; workspace $ws4
+bindsym $mod+$mod2+t move container to workspace $ws5; workspace $ws5
+bindsym $mod+$mod2+y move container to workspace $ws6; workspace $ws6
+bindsym $mod+$mod2+u move container to workspace  $ws7; workspace $ws7
+bindsym $mod+$mod2+i move container to workspace  $ws8; workspace $ws8
+bindsym $mod+$mod2+o move container to workspace  $ws9; workspace $ws9
+bindsym $mod+$mod2+p move container to workspace  $ws10; workspace $ws10
+
+bindsym $mod+Left exec $HOME/Scripts/i3-resize/i3-resize left 5 px or 5 ppt
+bindsym $mod+Up exec $HOME/Scripts/i3-resize/i3-resize up 5 px or 5 ppt
+bindsym $mod+Down exec $HOME/Scripts/i3-resize/i3-resize down 5 px or 5 ppt
+bindsym $mod+Right exec $HOME/Scripts/i3-resize/i3-resize right 5 px or 5 ppt
+
+bindsym $mod+Return exec $terminal
+bindsym $mod+$mod2+Return exec $terminal --class dropdown
+bindsym $mod+a kill
+
+bindsym $mod+$left focus left, exec /home/marcus/.local/bin/flash_window
+bindsym $mod+$down focus down, exec /home/marcus/.local/bin/flash_window
+bindsym $mod+$up focus up, exec /home/marcus/.local/bin/flash_window
+bindsym $mod+$right focus right, exec /home/marcus/.local/bin/flash_window
+bindsym $mod+$mod2+$left move left
+bindsym $mod+$mod2+$down move down
+bindsym $mod+$mod2+$up move up
+bindsym $mod+$mod2+$right move right
+
+bindsym $mod+backslash split h
+bindsym $mod+minus split v
+
+bindsym $mod+s scratchpad show
+bindsym $mod+$mod2+s move scratchpad
+bindsym $mod+m exec flameshot gui
+bindsym $mod+$mod2+m exec flameshot screen -c
+
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+n exec $HOME/Scripts/pulseaudio-control/pulseaudio-control --node-blacklist "alsa_output.pci-0000_07_00.1.hdmi-stereo" next-node
+
+bindsym $mod+$mod2+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+z layout tabbed
+bindsym $mod+x layout toggle split
+
+# Workspace
+set $ws1 "1:Q: LibreWolf"
+set $ws2 "2:W: Discord"
+set $ws3 "3:E"
+set $ws4 "4:R"
+set $ws5 "5:T"
+set $ws6 "6:Y: OBS"
+set $ws7 "7:U: Steam"
+set $ws8 "8:I: Obsidian"
+set $ws9 "9:O: Mail"
+set $ws10 "10:P: Music"
+
+assign [class="librewolf-default"] $ws1
+assign [class="discord"] $ws2
+assign [class="^obs$"] $ws6
+assign [class="steam"] $ws7
+assign [class="steam_app_*"] $ws7
+assign [class="obsidian"] $ws8
+assign [class="Evolution"] $ws9
+assign [class="YouTube Music"] $ws10
+
+# Exec Always
+exec_always --no-startup-id feh --bg-scale ~/.wallpaper.png
+exec_always setxkbmap -layout eu
+# exec_always --no-startup-id picom
+exec_always --no-startup-id compton
+exec_always $HOME/.config/polybar/launch.sh
+
+# Exec
+exec --no-startup-id setxkbmap -layout eu
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -i /home/marcus/.wallpaper.png --nofork
+exec --no-startup-id syncthing serve --no-browser
+exec --no-startup-id Obsidian
+exec --no-startup-id flameshot
+exec --no-startup-id librewolf 
+exec --no-startup-id evolution
+exec --no-startup-id discord
+exec --no-startup-id steam 
+exec --no-startup-id $terminal --class dropdown
+exec --no-startup-id nm-applet
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id $HOME/Applications/YouTube-Music-1.20.0_28924cdb4b1f74242d590d8004b7d9d8.AppImage
