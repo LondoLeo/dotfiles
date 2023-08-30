@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+# Usage: i3-resize.sh <direction> [<px or ppt size>]
+#
+# For i3wm (X11) and Sway (Wayland)
+#
+# Resize i3wm/Sway window panes with the keyboard, independently of which pane has focus.
+# This is similar to resizing with the mouse: moving left always goes left, moving down always goes down, etc.
+#
+# Floating windows are resized from the bottom right corner.
+#
+# Dependency: jq
+#
+# Key bindings example:
+#      # "$mod" to move to, "$mod+Shift" to move, "$mod+Control" to resize
+#      bindsym $mod+Control+Left  $exec i3-resize.sh left  3 px or 3 ppt
+#      bindsym $mod+Control+Down  $exec i3-resize.sh down  3 px or 3 ppt
+#      bindsym $mod+Control+Up    $exec i3-resize.sh up    3 px or 3 ppt
+#      bindsym $mod+Control+Right $exec i3-resize.sh right 3 px or 3 ppt
+#
+# Links:
+#      https://gist.github.com/willemw12
+#      https://i3wm.org
+#      https://swaywm.org/
+
+dir="${1:?direction argument is missing}"
+shift
+
+# Avoid small resize steps for floating windows by ignoring <px or ppt size>,
+# which is also done in the default config example (move floating window).
+if [[ "$XDG_SESSION_TYPE" = "wayland" ]]; then
+  if [[ "$(swaymsg -t get_tree | jq -r '..|try select(.focused == true).type == "floating_con"')" = "true" ]]; then
+    ARGS=()
+  else
+    ARGS=("$@")
+  fi
+
+  msgcmd=swaymsg
+else
+  if [[ "$(i3-msg -t get_tree | jq -r '..|try select(.focused == true).floating')" =~ _on$ ]]; then
+    ARGS=()
+  else
+    ARGS=("$@")
+  fi
+
+  msgcmd=i3-msg
+fi
+
+case "${dir,,}" in
+  left)  $msgcmd --quiet resize shrink right "${ARGS[@]}" || $msgcmd --quiet resize grow left   "${ARGS[@]}";;
+  down)  $msgcmd --quiet resize grow down    "${ARGS[@]}" || $msgcmd --quiet resize shrink up   "${ARGS[@]}";;
+  up)    $msgcmd --quiet resize shrink down  "${ARGS[@]}" || $msgcmd --quiet resize grow up     "${ARGS[@]}";;
+  right) $msgcmd --quiet resize grow right   "${ARGS[@]}" || $msgcmd --quiet resize shrink left "${ARGS[@]}";;
+  *)     exit 3
+esac

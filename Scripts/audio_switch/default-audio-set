@@ -1,0 +1,4 @@
+#!/bin/bash
+
+device=`cat $HOME/Scripts/audio_switch/active_audio_device`
+./switch-audio --$device

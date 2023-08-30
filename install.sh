@@ -7,4 +7,4 @@ ln -s $HOME/.dotfiles/polybar $HOME/.config/polybar
 ln -s $HOME/.dotfiles/nvim $HOME/.config/nvim
 ln -s $HOME/.dotfiles/.lockscreen.png $HOME/.lockscreen.png
 ln -s $HOME/.dotfiles/.wallpaper.png $HOME/.wallpaper.png
-
+ln -s $HOME/.dotfiles/Scripts $HOME/Scripts
