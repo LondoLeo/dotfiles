@@ -130,7 +130,8 @@ assign [class="YouTube Music"] $ws10
 exec_always --no-startup-id feh --bg-scale ~/.wallpaper.png
 exec_always --no-startup-id "setxkbmap -model pc105 -layout eu"
 # exec_always --no-startup-id picom
-exec_always --no-startup-id killall compton && compton
+exec_always --no-startup-id killall compton
+exec_always --no-startup-id compton --focus-exclude 'class_g = "Rofi"'
 exec_always $HOME/.config/polybar/launch.sh
 
 # Exec
