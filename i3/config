@@ -1,7 +1,7 @@
 # Constants
 set $mod Mod4
 set $mod2 control
-set $terminal kitty
+set $terminal xterm
 set $left h
 set $down j
 set $up k

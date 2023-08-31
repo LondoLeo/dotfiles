@@ -9,3 +9,4 @@ ln -s $HOME/.dotfiles/compton.conf $HOME/.config/compton.conf
 ln -s $HOME/.dotfiles/.lockscreen.png $HOME/.lockscreen.png
 ln -s $HOME/.dotfiles/.wallpaper.png $HOME/.wallpaper.png
 ln -s $HOME/.dotfiles/Scripts $HOME/Scripts
+ln -s $HOME/.dotfiles/.Xdefaults $HOME/.Xdefaults
