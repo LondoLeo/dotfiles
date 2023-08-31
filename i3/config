@@ -80,10 +80,10 @@ bindsym $mod+Return exec $terminal
 bindsym $mod+$mod2+Return exec $terminal --class dropdown
 bindsym $mod+q kill
 
-bindsym $mod+$left focus left, exec /home/marcus/.local/bin/flash_window
-bindsym $mod+$down focus down, exec /home/marcus/.local/bin/flash_window
-bindsym $mod+$up focus up, exec /home/marcus/.local/bin/flash_window
-bindsym $mod+$right focus right, exec /home/marcus/.local/bin/flash_window
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
 bindsym $mod+$mod2+$left move left
 bindsym $mod+$mod2+$down move down
 bindsym $mod+$mod2+$up move up
@@ -130,7 +130,7 @@ assign [class="YouTube Music"] $ws10
 exec_always --no-startup-id feh --bg-scale ~/.wallpaper.png
 exec_always --no-startup-id "setxkbmap -model pc105 -layout eu"
 # exec_always --no-startup-id picom
-exec_always --no-startup-id compton
+exec_always --no-startup-id killall compton && compton
 exec_always $HOME/.config/polybar/launch.sh
 
 # Exec
