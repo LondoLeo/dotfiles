@@ -22,7 +22,7 @@ client.background #ffffff
 # General config
 font pango:monospace 10
 focus_follows_mouse no
-default_border pixel 1
+default_border pixel 3
 
 for_window [instance="^dropdown$"] \
     floating enable, border none, \
@@ -112,7 +112,7 @@ set $ws2 "2: Discord"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
-set $ws6 "6: OBS"
+set $ws6 "6"
 set $ws7 "7: Steam"
 set $ws8 "8: Obsidian"
 set $ws9 "9: Mail"
@@ -122,7 +122,7 @@ assign [class="librewolf-default"] $ws1
 assign [class="discord"] $ws2
 assign [class="^obs$"] $ws6
 assign [class="steam"] $ws7
-assign [class="steam_app_*"] $ws7
+assign [class="steam_app_*"] $ws5
 assign [class="obsidian"] $ws8
 assign [class="Evolution"] $ws9
 assign [class="YouTube Music"] $ws10
