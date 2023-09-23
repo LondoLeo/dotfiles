@@ -1,6 +1,7 @@
 # Constants
 set $mod Mod4
 set $mod2 control
+floating_modifier Mod4
 set $terminal kitty
 set $left h
 set $down j
@@ -31,6 +32,7 @@ for_window [instance="^dropdown$"] \
     move scratchpad
 
 for_window [class="^steam_app_*$"] fullscreen enable
+for_window [class="Bitwarden"] floating enable
 
 # Keybinds
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
