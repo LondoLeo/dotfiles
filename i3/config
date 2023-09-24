@@ -1,7 +1,6 @@
 # Constants
 set $mod Mod4
 set $mod2 control
-floating_modifier Mod4
 set $terminal kitty
 set $left h
 set $down j
@@ -24,6 +23,7 @@ client.background #ffffff
 font pango:monospace 10
 focus_follows_mouse no
 default_border pixel 3
+floating_modifier $mod
 
 for_window [instance="^dropdown$"] \
     floating enable, border none, \
@@ -32,8 +32,10 @@ for_window [instance="^dropdown$"] \
     move scratchpad
 
 for_window [class="^steam_app_*$"] fullscreen enable
-for_window [class="Bitwarden"] floating enable
+for_window [class="Bitwarden"] floating enable, move position center, move scratchpad, scratchpad show
+for_window [class="Vial"] floating enable, move position center, resize set 1500 1000, move scratchpad, scratchpad show
 
+hide_edge_borders smart
 # Keybinds
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
@@ -95,7 +97,8 @@ bindsym $mod+$mod2+$right move right
 bindsym $mod+backslash split h
 bindsym $mod+minus split v
 
-bindsym $mod+s scratchpad show
+bindsym $mod+s [class="^dropdown$"] scratchpad show
+bindsym $mod+a [class="^(?!dropdown).*$"] scratchpad show
 bindsym $mod+$mod2+s move scratchpad
 bindsym $mod+p exec flameshot gui
 bindsym $mod+$mod2+p exec flameshot screen -c
