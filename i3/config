@@ -20,7 +20,7 @@ client.unfocused $bg-color $bg-color $text-color $indicator $bg-color
 client.background #ffffff
 
 # General config
-font pango:monospace 10
+font pango:Ubuntu Regular 14
 focus_follows_mouse no
 default_border pixel 3
 floating_modifier $mod
@@ -32,8 +32,10 @@ for_window [instance="^dropdown$"] \
     move scratchpad
 
 for_window [class="^steam_app_*$"] fullscreen enable
-for_window [class="Bitwarden"] floating enable, move position center, move scratchpad, scratchpad show
-for_window [class="Vial"] floating enable, move position center, resize set 1500 1000, move scratchpad, scratchpad show
+for_window [class="Bitwarden"] floating enable, border none, move position center, move scratchpad, scratchpad show
+for_window [class="Vial"] floating enable, border none, move position center, move scratchpad, scratchpad show
+for_window [class="Org.gnome.Nautilus"] floating enable, border none, resize set 50 ppt 50 ppt, move position center
+
 
 hide_edge_borders smart
 # Keybinds
@@ -99,8 +101,8 @@ bindsym $mod+minus split v
 
 bindsym $mod+s [class="^dropdown$"] scratchpad show
 bindsym $mod+a [class="^(?!dropdown).*$"] scratchpad show
-bindsym $mod+$mod2+s move scratchpad
-bindsym $mod+p exec flameshot gui
+bindsym $mod+$mod2+a move scratchpad
+bindsym Print exec flameshot gui
 bindsym $mod+$mod2+p exec flameshot screen -c
 
 bindsym $mod+Tab workspace back_and_forth
@@ -112,44 +114,42 @@ bindsym $mod+t layout tabbed
 bindsym $mod+x layout toggle split
 
 # Workspace
-set $ws1 "1: LibreWolf"
-set $ws2 "2: Discord"
+set $ws1 "1"
+set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
-set $ws7 "7: Steam"
-set $ws8 "8: Obsidian"
-set $ws9 "9: Mail"
-set $ws10 "10: Music"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
 
-assign [class="librewolf-default"] $ws1
+assign [class="Vivaldi-stable"] $ws1
 assign [class="discord"] $ws2
 assign [class="^obs$"] $ws6
 assign [class="steam"] $ws7
 assign [class="steam_app_*"] $ws5
-assign [class="obsidian"] $ws8
+#assign [class="obsidian"] $ws8
 assign [class="Evolution"] $ws9
 assign [class="YouTube Music"] $ws10
 
 # Exec Always
 exec_always --no-startup-id feh --bg-scale ~/.wallpaper.png
 exec_always --no-startup-id "setxkbmap -model pc105 -layout eu"
-# exec_always --no-startup-id picom
-exec_always --no-startup-id killall compton
 exec_always --no-startup-id compton --focus-exclude 'class_g = "Rofi"'
 exec_always $HOME/.config/polybar/launch.sh
 
 # Exec
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -i /home/marcus/.wallpaper.png --nofork
-exec --no-startup-id syncthing serve --no-browser
-exec --no-startup-id Obsidian
-exec --no-startup-id flameshot
-exec --no-startup-id librewolf 
-exec --no-startup-id evolution
 exec --no-startup-id discord
+exec --no-startup-id syncthing serve --no-browser
+#exec --no-startup-id Obsidian
+exec --no-startup-id flameshot
+exec --no-startup-id vivaldi 
+exec --no-startup-id evolution
 exec --no-startup-id steam 
 exec --no-startup-id $terminal --class dropdown
 exec --no-startup-id nm-applet
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id $HOME/Applications/YouTube-Music-1.20.0_28924cdb4b1f74242d590d8004b7d9d8.AppImage
+exec --no-startup-id $HOME/Applications/Youtube-Music.AppImage
