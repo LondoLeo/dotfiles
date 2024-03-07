@@ -9,15 +9,23 @@ set $right l
 set $refresh_i3status killall -SIGUSR1 i3status
 
 # Colors
-set $bg-color #2f343f 
-set $text-color #d8dee8
-set $highlight-color #bf616a 
-set $border-color #6f747f
-set $indicator #b391e5
-client.focused $border-color $border-color $text-color  $indicator $border-color 
-client.focused_inactive $bg-color $bg-color $text-color $bg-color $bg-color
-client.unfocused $bg-color $bg-color $text-color $indicator $bg-color
-client.background #ffffff
+#set $bg-color #2f343f 
+#set $text-color #d8dee8
+#set $highlight-color #bf616a 
+#set $border-color #6f747f
+#set $indicator #b391e5
+#client.focused $border-color $border-color $text-color  $indicator $border-color 
+#client.focused_inactive $bg-color $bg-color $text-color $bg-color $bg-color
+#client.unfocused $bg-color $bg-color $text-color $indicator $bg-color
+#client.background #ffffff
+# target                 title     bg    text   indicator  border
+client.focused           $lavender $base $text  $rosewater $lavender
+client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
+client.unfocused         $overlay0 $base $text  $rosewater $overlay0
+client.urgent            $peach    $base $peach $overlay0  $peach
+client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
+client.background        $base
+
 
 # General config
 font pango:Ubuntu Regular 14
@@ -84,7 +92,7 @@ bindsym $mod+Down exec $HOME/Scripts/i3-resize/i3-resize down 5 px or 5 ppt
 bindsym $mod+Right exec $HOME/Scripts/i3-resize/i3-resize right 5 px or 5 ppt
 
 bindsym $mod+Return exec $terminal
-bindsym $mod+$mod2+Return exec $terminal --class dropdown
+bindsym $mod+$mod2+s exec $terminal --class dropdown
 bindsym $mod+q kill
 
 bindsym $mod+$left focus left
@@ -129,7 +137,6 @@ assign [class="Vivaldi-stable"] $ws1
 assign [class="discord"] $ws2
 assign [class="^obs$"] $ws6
 assign [class="steam"] $ws7
-assign [class="steam_app_*"] $ws5
 #assign [class="obsidian"] $ws8
 assign [class="Evolution"] $ws9
 assign [class="YouTube Music"] $ws10
@@ -148,7 +155,7 @@ exec --no-startup-id syncthing serve --no-browser
 exec --no-startup-id flameshot
 exec --no-startup-id vivaldi 
 exec --no-startup-id evolution
-exec --no-startup-id steam 
+#exec --no-startup-id steam 
 exec --no-startup-id $terminal --class dropdown
 exec --no-startup-id nm-applet
 exec --no-startup-id dex --autostart --environment i3
