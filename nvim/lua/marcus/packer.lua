@@ -38,4 +38,28 @@ return require('packer').startup(function(use)
 			{'rafamadriz/friendly-snippets'}
 		}
 }
+    use {
+        'catppuccin/nvim', as = 'catppuccin',
+        config = function ()
+		vim.cmd.colorscheme 'catppuccin-macchiato'
+        end
+    }
+    use  ('folke/which-key.nvim')
+    use ( 'numToStr/Comment.nvim')
+    use {
+        'windwp/nvim-autopairs',
+        event = 'InsertEnter',
+        config = function () 
+            require("nvim-autopairs").setup {}
+        end
+    }
+    use {
+        "kylechui/nvim-surround",
+        tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+        config = function()
+            require("nvim-surround").setup{}
+        end
+    }
+    use ( "github/copilot.vim")
+    use { 'lewis6991/gitsigns.nvim' }
 end)
