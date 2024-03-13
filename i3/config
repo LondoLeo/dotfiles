@@ -120,6 +120,7 @@ bindsym $mod+Right exec $HOME/Scripts/i3-resize/i3-resize right 5 px or 5 ppt
 bindsym $mod+Return exec $terminal
 bindsym $mod+$mod2+s exec $terminal --class dropdown
 bindsym $mod+q kill
+bindsym $mod+$mod2+q exec $HOME/Scripts/i3locker.sh 
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
@@ -169,12 +170,13 @@ assign [class="YouTube Music"] $ws10
 
 # Exec Always
 exec_always --no-startup-id feh --bg-scale ~/.wallpaper.png
+exec_always --no-startup-id convert -resize $(xdpyinfo | grep dimensions | cut -d\  -f7 | cut -dx -f1) $HOME/.lockscreen.png $HOME/.lock
 exec_always --no-startup-id "setxkbmap -model pc105 -layout eu"
 exec_always --no-startup-id compton --focus-exclude 'class_g = "Rofi"'
 exec_always $HOME/.config/polybar/launch.sh
 
 # Exec
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -i /home/marcus/.wallpaper.png --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- $HOME/Scripts/i3locker.sh 
 exec --no-startup-id discord
 exec --no-startup-id syncthing serve --no-browser
 #exec --no-startup-id Obsidian
