@@ -118,7 +118,7 @@ bindsym $mod+Down exec $HOME/Scripts/i3-resize/i3-resize down 5 px or 5 ppt
 bindsym $mod+Right exec $HOME/Scripts/i3-resize/i3-resize right 5 px or 5 ppt
 
 bindsym $mod+Return exec $terminal
-bindsym $mod+$mod2+s exec $terminal --class dropdown
+bindsym $mod+$mod2+s exec $terminal --config $HOME/.config/kitty/dropdown/kitty.conf --class dropdown
 bindsym $mod+q kill
 bindsym $mod+$mod2+q exec $HOME/Scripts/i3locker.sh 
 
@@ -137,7 +137,7 @@ bindsym $mod+minus split v
 bindsym $mod+s [class="^dropdown$"] scratchpad show
 bindsym $mod+a [class="^(?!dropdown).*$"] scratchpad show
 bindsym $mod+$mod2+a move scratchpad
-bindsym Print exec flameshot gui
+bindsym $mod+p exec flameshot gui
 bindsym $mod+$mod2+p exec flameshot screen -c
 
 bindsym $mod+Tab workspace back_and_forth
@@ -184,7 +184,7 @@ exec --no-startup-id flameshot
 exec --no-startup-id vivaldi 
 exec --no-startup-id evolution
 #exec --no-startup-id steam 
-exec --no-startup-id $terminal --class dropdown
+exec --no-startup-id $terminal --config $HOME/.config/kitty/dropdown/kitty.conf  --class dropdown
 exec --no-startup-id nm-applet
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id $HOME/Applications/Youtube-Music.AppImage
