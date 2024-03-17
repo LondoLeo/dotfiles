@@ -173,10 +173,11 @@ exec_always --no-startup-id feh --bg-scale ~/.wallpaper.png
 exec_always --no-startup-id convert -resize $(xdpyinfo | grep dimensions | cut -d\  -f7 | cut -dx -f1) $HOME/.lockscreen.png $HOME/.lock
 exec_always --no-startup-id "setxkbmap -model pc105 -layout eu"
 exec_always --no-startup-id compton --focus-exclude 'class_g = "Rofi"'
-exec_always $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Exec
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $HOME/Scripts/i3locker.sh 
+exec --no-startup-id xautolock -time 15 -locker "$HOME/Scripts/i3locker.sh & systemctl suspend"
 exec --no-startup-id discord
 exec --no-startup-id syncthing serve --no-browser
 #exec --no-startup-id Obsidian
