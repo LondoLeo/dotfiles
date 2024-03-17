@@ -177,7 +177,6 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Exec
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $HOME/Scripts/i3locker.sh 
-exec --no-startup-id xautolock -time 15 -locker "$HOME/Scripts/i3locker.sh & systemctl suspend"
 exec --no-startup-id discord
 exec --no-startup-id syncthing serve --no-browser
 #exec --no-startup-id Obsidian
