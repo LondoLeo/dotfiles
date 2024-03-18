@@ -35,15 +35,7 @@ set $surface0  #363a4f
 set $base      #24273a
 set $mantle    #1e2030
 set $crust     #181926
-#set $bg-color #2f343f 
-#set $text-color #d8dee8
-#set $highlight-color #bf616a 
-#set $border-color #6f747f
-#set $indicator #b391e5
-#client.focused $border-color $border-color $text-color  $indicator $border-color 
-#client.focused_inactive $bg-color $bg-color $text-color $bg-color $bg-color
-#client.unfocused $bg-color $bg-color $text-color $indicator $bg-color
-#client.background #ffffff
+
 # target                 title     bg    text   indicator  border
 client.focused           $yellow $yellow $text  $rosewater $yellow
 client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
