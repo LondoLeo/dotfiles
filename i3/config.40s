@@ -1,0 +1,182 @@
+# Constants
+set $mod Mod4
+set $mod2 control
+set $terminal kitty
+set $left h
+set $down j
+set $up k
+set $right l
+set $refresh_i3status killall -SIGUSR1 i3status
+
+# Colors
+set $rosewater #f4dbd6
+set $flamingo  #f0c6c6
+set $pink      #f5bde6
+set $mauve     #c6a0f6
+set $red       #ed8796
+set $maroon    #ee99a0
+set $peach     #f5a97f
+set $yellow    #eed49f
+set $green     #a6da95
+set $teal      #8bd5ca
+set $sky       #91d7e3
+set $sapphire  #7dc4e4
+set $blue      #8aadf4
+set $lavender  #b7bdf8
+set $text      #cad3f5
+set $subtext1  #b8c0e0
+set $subtext0  #a5adcb
+set $overlay2  #939ab7
+set $overlay1  #8087a2
+set $overlay0  #6e738d
+set $surface2  #5b6078
+set $surface1  #494d64
+set $surface0  #363a4f
+set $base      #24273a
+set $mantle    #1e2030
+set $crust     #181926
+
+# target                 title     bg    text   indicator  border
+client.focused           $yellow $yellow $text  $rosewater $yellow
+client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
+client.unfocused         $overlay0 $base $text  $rosewater $overlay0
+client.urgent            $peach    $base $peach $overlay0  $peach
+client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
+client.background        $base
+
+
+# General config
+font pango:Ubuntu Regular 14
+focus_follows_mouse no
+default_border pixel 3
+floating_modifier $mod
+
+for_window [instance="^dropdown$"] \
+    floating enable, border none, \
+    resize set 100 ppt 50 ppt, \
+    move position 0 34, \
+    move scratchpad
+
+for_window [class="^steam_app_*$"] fullscreen enable
+for_window [class="Bitwarden"] floating enable, border none, move position center, move scratchpad, scratchpad show
+for_window [class="Vial"] floating enable, border none, move position center, move scratchpad, scratchpad show
+for_window [class="Org.gnome.Nautilus"] floating enable, border none, resize set 50 ppt 50 ppt, move position center
+
+
+hide_edge_borders smart
+# Keybinds
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+bindsym XF86AudioPlay exec playerctl --player=chromium play-pause
+bindsym XF86AudioNext exec playerctl --player=chromium next
+bindsym XF86AudioPrev exec playerctl --player=chromium previous
+
+bindsym $mod+d exec "rofi -modi drun,run -show drun -sort fzf"
+
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+$mod2+x restart
+bindsym $mod+$mod2+z exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym $mod+q workspace $ws1
+bindsym $mod+w workspace $ws2
+bindsym $mod+e workspace  $ws3
+bindsym $mod+r workspace  $ws4
+bindsym $mod+t workspace $ws5
+bindsym $mod+y workspace $ws6
+bindsym $mod+u workspace  $ws7
+bindsym $mod+i workspace  $ws8
+bindsym $mod+o workspace  $ws9
+bindsym $mod+p workspace $ws10
+
+bindsym $mod+$mod2+q move container to workspace $ws1; workspace $ws1
+bindsym $mod+$mod2+w move container to workspace $ws2; workspace $ws2
+bindsym $mod+$mod2+e move container to workspace  $ws3; workspace $ws3
+bindsym $mod+$mod2+r move container to workspace  $ws4; workspace $ws4
+bindsym $mod+$mod2+t move container to workspace $ws5; workspace $ws5
+bindsym $mod+$mod2+y move container to workspace $ws6; workspace $ws6
+bindsym $mod+$mod2+u move container to workspace  $ws7; workspace $ws7
+bindsym $mod+$mod2+i move container to workspace  $ws8; workspace $ws8
+bindsym $mod+$mod2+o move container to workspace  $ws9; workspace $ws9
+bindsym $mod+$mod2+p move container to workspace  $ws10; workspace $ws10
+
+bindsym $mod+Left exec $HOME/Scripts/i3-resize/i3-resize left 5 px or 5 ppt
+bindsym $mod+Up exec $HOME/Scripts/i3-resize/i3-resize up 5 px or 5 ppt
+bindsym $mod+Down exec $HOME/Scripts/i3-resize/i3-resize down 5 px or 5 ppt
+bindsym $mod+Right exec $HOME/Scripts/i3-resize/i3-resize right 5 px or 5 ppt
+
+bindsym $mod+Return exec $terminal
+bindsym $mod+Escape kill
+bindsym $mod+$mod2+Escape exec $HOME/Scripts/i3locker.sh 
+
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+bindsym $mod+$mod2+$left move left
+bindsym $mod+$mod2+$down move down
+bindsym $mod+$mod2+$up move up
+bindsym $mod+$mod2+$right move right
+
+bindsym $mod+b split h
+bindsym $mod+v split v
+
+bindsym $mod+s [class="^dropdown$"] scratchpad show
+bindsym $mod+$mod2+s exec $terminal --config $HOME/.config/kitty/dropdown/kitty.conf --class dropdown
+bindsym $mod+a [class="^(?!dropdown).*$"] scratchpad show
+bindsym $mod+$mod2+a move scratchpad
+bindsym Print exec flameshot gui
+bindsym $mod2+Print exec flameshot screen -c
+
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+n exec $HOME/Scripts/pulseaudio-control/pulseaudio-control --node-blacklist "alsa_output.pci-0000_07_00.1.hdmi-stereo" next-node
+
+bindsym $mod+$mod2+space floating toggle
+bindsym $mod+space focus mode_toggle
+# bindsym $mod+t layout tabbed
+# bindsym $mod+x layout toggle split
+
+# Workspace
+set $ws1 "Q"
+set $ws2 "W"
+set $ws3 "E"
+set $ws4 "R"
+set $ws5 "T"
+set $ws6 "Y"
+set $ws7 "U"
+set $ws8 "I"
+set $ws9 "O"
+set $ws10 "P"
+
+assign [class="Vivaldi-stable"] $ws1
+assign [class="discord"] $ws2
+assign [class="^obs$"] $ws6
+assign [class="steam"] $ws7
+#assign [class="obsidian"] $ws8
+assign [class="Evolution"] $ws9
+assign [class="YouTube Music"] $ws10
+
+# Exec Always
+exec_always --no-startup-id feh --bg-scale ~/.wallpaper.png
+exec_always --no-startup-id convert -resize $(xdpyinfo | grep dimensions | cut -d\  -f7 | cut -dx -f1) $HOME/.lockscreen.png $HOME/.lock
+exec_always --no-startup-id "setxkbmap -model pc105 -layout eu"
+exec_always --no-startup-id compton --focus-exclude 'class_g = "Rofi"'
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# Exec
+exec --no-startup-id xss-lock --transfer-sleep-lock -- $HOME/Scripts/i3locker.sh 
+exec --no-startup-id discord
+exec --no-startup-id syncthing serve --no-browser
+#exec --no-startup-id Obsidian
+exec --no-startup-id flameshot
+exec --no-startup-id vivaldi 
+exec --no-startup-id evolution
+#exec --no-startup-id steam 
+exec --no-startup-id $terminal --config $HOME/.config/kitty/dropdown/kitty.conf  --class dropdown
+exec --no-startup-id nm-applet
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id $HOME/Applications/Youtube-Music.AppImage
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
