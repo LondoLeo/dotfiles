@@ -1,7 +1,7 @@
 # Constants
 set $mod Mod4
 set $mod2 control
-set $terminal kitty
+set $terminal wezterm
 set $left h
 set $down j
 set $up k
@@ -79,7 +79,7 @@ bindsym $mod+d exec "rofi -modi drun,run -show drun -sort fzf"
 bindsym $mod+f fullscreen toggle
 
 bindsym $mod+$mod2+x restart
-bindsym $mod+$mod2+z exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+$mod2+z exec xautolock -locknow
 
 bindsym $mod+q workspace $ws1
 bindsym $mod+w workspace $ws2
@@ -110,7 +110,7 @@ bindsym $mod+Right exec $HOME/Scripts/i3-resize/i3-resize right 5 px or 5 ppt
 
 bindsym $mod+Return exec $terminal
 bindsym $mod+Escape kill
-bindsym $mod+$mod2+Escape exec $HOME/Scripts/i3locker.sh 
+
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
@@ -125,7 +125,7 @@ bindsym $mod+b split h
 bindsym $mod+v split v
 
 bindsym $mod+s [class="^dropdown$"] scratchpad show
-bindsym $mod+$mod2+s exec $terminal --config $HOME/.config/kitty/dropdown/kitty.conf --class dropdown
+bindsym $mod+$mod2+s exec $terminal --class dropdown
 bindsym $mod+a [class="^(?!dropdown).*$"] scratchpad show
 bindsym $mod+$mod2+a move scratchpad
 bindsym Print exec flameshot gui
@@ -165,6 +165,7 @@ exec_always --no-startup-id convert -resize $(xdpyinfo | grep dimensions | cut -
 exec_always --no-startup-id "setxkbmap -model pc105 -layout eu"
 exec_always --no-startup-id compton --focus-exclude 'class_g = "Rofi"'
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id xautolock -killtime 10 -killer "systemctl suspend" -time 10 -locker "$HOME/Scripts/i3locker.sh"
 
 # Exec
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $HOME/Scripts/i3locker.sh 
@@ -175,7 +176,7 @@ exec --no-startup-id flameshot
 exec --no-startup-id vivaldi 
 exec --no-startup-id evolution
 #exec --no-startup-id steam 
-exec --no-startup-id $terminal --config $HOME/.config/kitty/dropdown/kitty.conf  --class dropdown
+exec --no-startup-id $terminal --class dropdown
 exec --no-startup-id nm-applet
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id $HOME/Applications/Youtube-Music.AppImage
