@@ -1,6 +1,5 @@
 local lsp_zero = require('lsp-zero')
 
-
 lsp_zero.on_attach(function(client, bufnr)
 	local opts = {buffer = bufnr, remap = false}
 
@@ -19,14 +18,20 @@ lsp_zero.on_attach(function(client, bufnr)
 	--  rs - Rename Symbol
 	vim.keymap.set("n", "<leader>rs", function() vim.lsp.buf.rename() end, opts)
 	--  dd - Display Diagnostics
-	vim.keymap.set("n", "<leader>dd", function() vim.lsp.diagnostic.open_float() end, opts)
-	--  dp - Diagnostics Prev
-	vim.keymap.set("n", "<leader>dp", function() vim.lsp.diagnostic.goto_prev() end, opts)
-	--  dn - Diagnistics Next
-	vim.keymap.set("n", "<leader>dn", function() vim.lsp.diagnostic.goto_next() end, opts)
+	vim.keymap.set("n", "<leader>dd", function() vim.diagnostic.open_float() end, opts)
+    --  ]d - Next Diagnostic
+	vim.keymap.set("n", "<leader>]d", function() vim.diagnostic.goto_prev() end, opts)
+	--  [d - Previous Diagnostic
+	vim.keymap.set("n", "<leader>[d", function() vim.diagnostic.goto_next() end, opts)
 end)
 
-
+-- vim.diagnostic.config({
+--     virtual_text = false,
+--     underline = true,
+--     sign = true,
+--     update_in_insert = false,
+--     severity_sort = true,
+-- })
 
 require('mason').setup({})
 require('mason-lspconfig').setup({

@@ -11,4 +11,6 @@ vim.keymap.set("n", "<C-,>", vim.cmd.bprev)
 vim.keymap.set("n", "<C-.>", vim.cmd.bnext)
 
 
+vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+
 
