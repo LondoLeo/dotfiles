@@ -50,6 +50,9 @@ font pango:Ubuntu Regular 14
 focus_follows_mouse no
 default_border pixel 3
 floating_modifier $mod
+gaps inner 10px
+#gaps outer 5px
+smart_gaps on
 
 for_window [instance="^dropdown$"] \
     floating enable, border none, \
@@ -108,7 +111,7 @@ bindsym $mod+Up exec $HOME/Scripts/i3-resize/i3-resize up 5 px or 5 ppt
 bindsym $mod+Down exec $HOME/Scripts/i3-resize/i3-resize down 5 px or 5 ppt
 bindsym $mod+Right exec $HOME/Scripts/i3-resize/i3-resize right 5 px or 5 ppt
 
-bindsym $mod+Return exec $terminal
+bindsym $mod+BackSpace exec $terminal
 bindsym $mod+Escape kill
 
 
@@ -153,8 +156,8 @@ set $ws10 "10:P"
 
 assign [class="Vivaldi-stable"] $ws1
 assign [class="discord"] $ws2
+assign [class="steam"] $ws4
 assign [class="^obs$"] $ws6
-assign [class="steam"] $ws7
 #assign [class="obsidian"] $ws8
 assign [class="Evolution"] $ws9
 assign [class="YouTube Music"] $ws10
