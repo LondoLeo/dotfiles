@@ -1,6 +1,6 @@
 # Constants
 set $mod Mod4
-set $mod2 shift 
+set $mod2 control 
 set $terminal wezterm
 set $left h
 set $down j
@@ -107,7 +107,7 @@ bindsym $mod+Up exec $HOME/Scripts/i3-resize/i3-resize up 5 px or 5 ppt
 bindsym $mod+Down exec $HOME/Scripts/i3-resize/i3-resize down 5 px or 5 ppt
 bindsym $mod+Right exec $HOME/Scripts/i3-resize/i3-resize right 5 px or 5 ppt
 
-bindsym $mod+Enter exec $terminal
+bindsym $mod+space exec $terminal
 bindsym $mod+Escape kill
 
 
@@ -124,7 +124,7 @@ bindsym $mod+b split h
 bindsym $mod+v split v
 
 bindsym $mod+s [class="^dropdown$"] scratchpad show
-bindsym $mod+$mod2+s exec $terminal --class dropdown
+bindsym $mod+$mod2+s exec $terminal start --class dropdown
 bindsym $mod+a [class="^(?!dropdown).*$"] scratchpad show
 bindsym $mod+$mod2+a move scratchpad
 bindsym Print exec flameshot gui
@@ -133,8 +133,8 @@ bindsym $mod2+Print exec flameshot screen -c
 bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+n exec $HOME/Scripts/pulseaudio-control/pulseaudio-control --node-blacklist "alsa_output.pci-0000_07_00.1.hdmi-stereo" next-node
 
-bindsym $mod+$mod2+space floating toggle
-bindsym $mod+space focus mode_toggle
+bindsym $mod+$mod2+g floating toggle
+bindsym $mod+g focus mode_toggle
 # bindsym $mod+t layout tabbed
 # bindsym $mod+x layout toggle split
 
@@ -176,7 +176,7 @@ exec --no-startup-id flameshot
 exec --no-startup-id vivaldi 
 exec --no-startup-id evolution
 #exec --no-startup-id steam 
-exec --no-startup-id $terminal --class dropdown
+exec --no-startup-id $terminal start --class dropdown
 exec --no-startup-id nm-applet
 exec --no-startup-id dex --autostart --environment i3
 # exec --no-startup-id $HOME/Applications/Youtube-Music.AppImage
