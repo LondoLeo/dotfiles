@@ -35,7 +35,7 @@ end)
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-	ensure_installed = {  'elp', 'jsonls', 'tsserver', 'ltex', 'lua_ls', 'marksman', 'pyright',  'yamlls', 'zls'},
+	ensure_installed = {},
 	handlers = {
 		lsp_zero.default_setup,
 		lua_ls = function()
