@@ -11,4 +11,3 @@ snap install nvim --classic
 sensors-detect --auto
 powertop --auto-tune
 ./set_symlinks.sh
-unzip JetBrainsMono.zip -d $HOME/.fonts
