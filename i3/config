@@ -1,6 +1,6 @@
 # Constants
 set $mod Mod4
-set $mod2 control 
+set $mod2 shift 
 set $terminal wezterm
 set $left h
 set $down j
@@ -51,8 +51,6 @@ focus_follows_mouse no
 default_border pixel 3
 floating_modifier $mod
 gaps inner 15px
-#gaps outer 5px
-#smart_gaps on
 
 for_window [instance="^dropdown$"]  floating enable, border none,  resize set 100 ppt 50 ppt,  move position 0 34,  move scratchpad
 
@@ -62,7 +60,6 @@ for_window [class="Vial"] floating enable, border none, move position center, mo
 for_window [class="Org.gnome.Nautilus"] floating enable, border none, resize set 50 ppt 50 ppt, move position center
 
 
-#hide_edge_borders smart
 # Keybinds
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
@@ -107,8 +104,8 @@ bindsym $mod+Up exec $HOME/Scripts/i3-resize/i3-resize up 5 px or 5 ppt
 bindsym $mod+Down exec $HOME/Scripts/i3-resize/i3-resize down 5 px or 5 ppt
 bindsym $mod+Right exec $HOME/Scripts/i3-resize/i3-resize right 5 px or 5 ppt
 
-bindsym $mod+space exec $terminal
-bindsym $mod+Escape kill
+bindsym $mod+Return exec $terminal
+bindsym $mod+BackSpace kill
 
 
 bindsym $mod+$left focus left
@@ -135,8 +132,6 @@ bindsym $mod+n exec $HOME/Scripts/pulseaudio-control/pulseaudio-control --node-b
 
 bindsym $mod+$mod2+g floating toggle
 bindsym $mod+g focus mode_toggle
-# bindsym $mod+t layout tabbed
-# bindsym $mod+x layout toggle split
 
 # Workspace
 set $ws1 "1:Q"
@@ -155,9 +150,7 @@ assign [class="discord"] $ws2
 assign [class="steam"] $ws4
 assign [class="Localsend_app"] $ws5
 assign [class="^obs$"] $ws6
-#assign [class="obsidian"] $ws8
 assign [class="Evolution"] $ws9
-# assign [class="YouTube Music"] $ws10
 
 # Exec Always
 exec_always --no-startup-id feh --bg-scale ~/.wallpaper.png
@@ -171,14 +164,11 @@ exec_always --no-startup-id xautolock -killtime 10 -killer "systemctl suspend" -
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $HOME/Scripts/i3locker.sh 
 exec --no-startup-id discord
 exec --no-startup-id syncthing serve --no-browser
-#exec --no-startup-id Obsidian
 exec --no-startup-id flameshot
 exec --no-startup-id vivaldi 
 exec --no-startup-id evolution
-#exec --no-startup-id steam 
 exec --no-startup-id $terminal start --class dropdown
 exec --no-startup-id nm-applet
 exec --no-startup-id dex --autostart --environment i3
-# exec --no-startup-id $HOME/Applications/Youtube-Music.AppImage
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 exec --no-startup-id /home/marcus/Applications/LocalSend-1.14.0-linux-x86-64.AppImage
